@@ -38,7 +38,10 @@ function addDownloads(panel, statsCluster)
         var downloadCount = 0;
         response["_aFiles"].forEach((f) => {downloadCount += f["_nDownloadCount"]});
         if (downloadCount == 0) return;
-
+        if (downloadCount >= 1000)
+        {
+            downloadCount = (Math.round((downloadCount/1000) * 10) / 10) + "k"
+        }
         statsCluster.innerHTML += `<span>
         <spriteicon class="MiscIcon SmallManualDownloadIcon"></spriteicon>
         <itemcount>` + downloadCount + `</itemcount>
