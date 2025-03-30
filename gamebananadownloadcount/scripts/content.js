@@ -1,10 +1,9 @@
-
 var itemTypes = {
     "tools":"Tool",
     "mods":"Mod",
-    "sounds":"Sound"
-}
-var fixedPanelIndex = [];
+    "sounds":"Sound",
+};
+fixedPanels = [];
 function getItemType(url)
 {
     var keys = Object.keys(itemTypes);
@@ -25,7 +24,6 @@ function addDownloads(panel, statsCluster)
     var itemId = itemUrl.substring(itemUrl.lastIndexOf("/")+1, itemUrl.length);
 
     var downloadQueryUrl = "https://gamebanana.com/apiv11/" + itemType + "/" + itemId + "/DownloadPage";
-    console.log(downloadQueryUrl)
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', downloadQueryUrl, true);
@@ -55,7 +53,6 @@ function checkLikePanels()
     for (var i=0; i<likePanels.length;i++)
     {
         if (fixedPanels.includes(i)) continue;
-        console.log("Found new panel!");
         fixedPanels.push(i);
         var element = likePanels[i];
 
@@ -71,4 +68,4 @@ function checkLikePanelExists()
         return;
     checkLikePanels();
 }
-setInterval(checkLikePanelExists, 5000);
+setInterval(checkLikePanelExists, 500);
